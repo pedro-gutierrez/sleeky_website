@@ -10,7 +10,7 @@ if config_env() in [:dev, :prod] do
     url: System.fetch_env!("DATABASE_URL"),
     pool_size: "DATABASE_POOL_SIZE" |> System.fetch_env!() |> String.to_integer()
 
-  config :sleeky_website, SleekyWebsite.Port,
+  config :sleeky_website, SleekyWebsite.Endpoint,
     scheme: :http,
     port: "PORT" |> System.fetch_env!() |> String.to_integer()
 end

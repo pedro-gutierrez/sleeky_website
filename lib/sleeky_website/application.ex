@@ -7,7 +7,7 @@ defmodule SleekyWebsite.Application do
   def start(_type, _args) do
     children = [
       SleekyWebsite.Repo,
-      SleekyWebsite.Port
+      SleekyWebsite.Endpoint
     ]
 
     opts = [strategy: :one_for_one, name: SleekyWebsite.Supervisor]
