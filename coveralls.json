@@ -1,0 +1,7 @@
+{
+  "skip_files": [
+    "lib/sleeky_website/release.ex",
+    "lib/sleeky_website/repo.ex",
+    "test/support"
+  ]
+}

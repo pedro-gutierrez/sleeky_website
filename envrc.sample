@@ -1,0 +1,4 @@
+export DATABASE_URL=postgres://sleeky_website@localhost/sleeky_website
+export DATABASE_POOL_SIZE=5
+export LOG_LEVEL=info
+export PORT=8080
