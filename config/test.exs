@@ -6,6 +6,6 @@ config :sleeky_website, SleekyWebsite.Repo,
   url: "postgres://sleeky_website:sleeky_website@localhost/sleeky_website_test",
   pool: Ecto.Adapters.SQL.Sandbox
 
-config :sleeky_website, SleekyWebsite.Port,
+config :sleeky_website, SleekyWebsite.Endpoint,
   scheme: :http,
   port: 8079
