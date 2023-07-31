@@ -7,6 +7,7 @@ defmodule SleekyWebsite.Application do
   def start(_type, _args) do
     children = [
       SleekyWebsite.Repo,
+      SleekyWebsite.Migrate,
       SleekyWebsite.Endpoint
     ]
 

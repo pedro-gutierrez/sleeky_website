@@ -11,7 +11,7 @@ defmodule SleekyWebsite.Schema.User do
     allow :admin
   end
 
-  action(:read) do
+  action :read do
     allow :admin
   end
 
