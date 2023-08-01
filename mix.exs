@@ -41,7 +41,7 @@ defmodule SleekyWebsite.MixProject do
       {:credo, "~> 1.6", only: [:dev, :test], runtime: false},
       {:dialyxir, "~> 1.0", only: [:dev, :test], runtime: false},
       {:excoveralls, "~> 0.14", only: [:test]},
-      {:sleeky, git: "https://github.com/pedro-gutierrez/sleeky.git"}
+      {:sleeky, git: "https://github.com/pedro-gutierrez/sleeky.git", branch: "ui-view-fixes"}
     ]
   end
 end
