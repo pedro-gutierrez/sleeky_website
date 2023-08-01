@@ -3,6 +3,7 @@ RUN apk add --no-cache --update bash git openssl
 ENV MIX_ENV=prod
 COPY config ./config
 COPY lib ./lib
+COPY priv ./priv
 COPY mix.exs .
 COPY mix.lock .
 RUN mix local.rebar --force \
