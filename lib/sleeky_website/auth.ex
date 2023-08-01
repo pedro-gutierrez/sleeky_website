@@ -3,7 +3,7 @@ defmodule SleekyWebsite.Auth do
   use Plug.Builder
   use Sleeky.Auth
 
-  plug :put_user
+  plug(:put_user)
 
   @doc false
   def put_user(conn, _opts) do
