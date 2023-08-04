@@ -1,6 +1,6 @@
-defmodule SleekyWebsite.UI do
+defmodule SleekyWebsite.Ui do
   @moduledoc false
-  use Sleeky.UI
+  use Sleeky.Ui
 
-  view SleekyWebsite.UI.Index
+  view SleekyWebsite.Ui.Index
 end

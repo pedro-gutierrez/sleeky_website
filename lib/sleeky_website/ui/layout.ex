@@ -1,7 +1,7 @@
-defmodule SleekyWebsite.UI.Layout do
+defmodule SleekyWebsite.Ui.Layout do
   @moduledoc false
 
-  use Sleeky.UI.View
+  use Sleeky.Ui.View
 
   render do
     html do
