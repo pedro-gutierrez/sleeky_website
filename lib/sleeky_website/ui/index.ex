@@ -2,6 +2,7 @@ defmodule SleekyWebsite.Ui.Index do
   @moduledoc false
   use Sleeky.Ui.View
 
+  alias SleekyWebsite.Ui.Hero
   alias SleekyWebsite.Ui.ExternalLink
   alias SleekyWebsite.Ui.Layout
   alias SleekyWebsite.Ui.QuickStart
@@ -10,26 +11,26 @@ defmodule SleekyWebsite.Ui.Index do
     view Layout do
       content do
         div do
-          p class: "title is-1 is-bold" do
-            "Sleeky Framework"
-          end
-
-          p class: "subtitle" do
-            "Declarative WebApps in Elixir"
+          view Hero do
+            icon("fa-solid fa-droplet")
+            title "SLEEKY"
+            slogan("ELIXIR APPLICATIONS")
           end
 
           view QuickStart
 
-          view ExternalLink do
-            title "Docs"
-            url("https://hexdocs.pm/sleeky/api-reference.html")
-            icon("fa-solid fa-book-open")
-          end
+          p class: "mt-4" do
+            view ExternalLink do
+              title "Hex Docs"
+              url("https://hexdocs.pm/sleeky/api-reference.html")
+              icon("fa-solid fa-book-open")
+            end
 
-          view ExternalLink do
-            title "Source"
-            url("https://github.com/pedro-gutierrez/sleeky.git")
-            icon("fa-brands fa-github")
+            view ExternalLink do
+              title "Source"
+              url("https://github.com/pedro-gutierrez/sleeky.git")
+              icon("fa-brands fa-github")
+            end
           end
         end
       end

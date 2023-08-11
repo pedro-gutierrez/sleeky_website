@@ -4,14 +4,8 @@ defmodule SleekyWebsite.Ui.ExternalLink do
   use Sleeky.Ui.View
 
   render do
-    a href: "{{ url }}", class: "mx-2" do
-      span class: "icon" do
-        i(class: "{{ icon }}")
-      end
-
-      span do
-        slot :title
-      end
+    a href: "{{ url }}", class: "has-backgound-pink has-color-white mx-1 p-3 button" do
+      slot :title
     end
   end
 end
