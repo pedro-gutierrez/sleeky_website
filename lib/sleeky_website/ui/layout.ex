@@ -13,12 +13,14 @@ defmodule SleekyWebsite.Ui.Layout do
       end
 
       body do
-        section class: "hero container has-text-centered" do
-          slot :content
+        section class: "section" do
+          div class: "container has-text-centered" do
+            slot :content
+          end
         end
 
-        div class: "footer has-background-white" do
-          div class: "content has-text-centered" do
+        footer class: "footer has-background-white" do
+          div class: "container has-text-centered" do
             p do
               "Made with"
               i(class: "ml-1 mr-1 fa-solid fa-heart has-text-danger")
