@@ -2,10 +2,13 @@ defmodule SleekyWebsite.Ui.Index do
   @moduledoc false
   use Sleeky.Ui.View
 
-  alias SleekyWebsite.Ui.Hero
-  alias SleekyWebsite.Ui.ExternalLink
-  alias SleekyWebsite.Ui.Layout
-  alias SleekyWebsite.Ui.QuickStart
+  alias SleekyWebsite.Ui.{
+    ExternalLink,
+    Hero,
+    LatestRelease,
+    Layout,
+    QuickStart
+  }
 
   render do
     view Layout do
@@ -18,6 +21,8 @@ defmodule SleekyWebsite.Ui.Index do
           end
 
           view QuickStart
+
+          view LatestRelease
 
           p class: "mt-4" do
             view ExternalLink do

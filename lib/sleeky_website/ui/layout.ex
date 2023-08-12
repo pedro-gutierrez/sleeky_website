@@ -11,6 +11,8 @@ defmodule SleekyWebsite.Ui.Layout do
         link rel: "stylesheet", href: "/assets/css/bulma.min.css"
         link rel: "stylesheet", href: "/assets/css/sleeky.css"
         link rel: "stylesheet", href: "/assets/css/fa.min.css"
+        script(src: "/assets/js/s.js")
+        script(defer: true, src: "/assets/js/sleeky.js")
       end
 
       body class: "has-text-white" do
