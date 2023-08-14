@@ -3,4 +3,5 @@ defmodule SleekyWebsite.Schema do
   use Sleeky.Schema
 
   entity(SleekyWebsite.Schema.User)
+  entity(SleekyWebsite.Schema.Release)
 end

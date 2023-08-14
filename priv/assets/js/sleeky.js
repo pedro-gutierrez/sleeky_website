@@ -590,7 +590,7 @@ function bindReadMode(parent) {
       });
 
       S(() =>{
-        let item = data.item;
+        let item = data().item;
         bindFields(el, item);
       });
     });

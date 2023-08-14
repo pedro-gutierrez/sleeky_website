@@ -8,10 +8,10 @@ defmodule SleekyWebsite.Auth do
   @doc false
   def put_user(conn, _opts) do
     # sample user
-    assign(conn, :current_user, %{id: "123", roles: [:admin]})
+    assign(conn, :current_user, %{id: "123", roles: [:anonymous]})
   end
 
-  roles [:current_user, :roles]
+  roles([:current_user, :roles])
 
   scope :owner do
     "**.user" == "current_user"

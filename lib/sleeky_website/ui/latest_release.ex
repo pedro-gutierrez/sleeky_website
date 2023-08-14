@@ -7,7 +7,7 @@ defmodule SleekyWebsite.Ui.LatestRelease do
       "data-id": "latest",
       "data-show": true do
       "Current version: "
-      span("data-field": "tag")
+      span("data-field": "vsn")
     end
   end
 end
