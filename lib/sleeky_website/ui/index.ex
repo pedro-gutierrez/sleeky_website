@@ -22,9 +22,9 @@ defmodule SleekyWebsite.Ui.Index do
                   div class: "content is-size-4" do
                     markdown class: "block" do
                       """
-                        **Sleeky** is a Elixir framework written in <strong
-                      class="has-text-danger-dark">Elixir</strong> that allows you
-                      to build **lean**, **batteries included** web applications in a **fast** and **declarative** way.
+                        **Sleeky** is a new framework that allows you
+                      to build **lean**, **batteries included** web applications in a **fast**<br/>
+                      and **declarative** way.
                       """
                     end
 
