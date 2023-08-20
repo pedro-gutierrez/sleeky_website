@@ -27,24 +27,28 @@ defmodule SleekyWebsite.Ui.Index do
                       and **declarative** way.
                       """
                     end
+                  end
 
-                    view Features do
-                      items do
-                        [
-                          [title: "Ash inspired"],
-                          [title: "Ecto based"],
-                          [title: "Phoenix compatible"]
-                        ]
-                      end
+                  view Features do
+                    items do
+                      [
+                        [title: "Ash inspired"],
+                        [title: "Ecto based"],
+                        [title: "Phoenix compatible"]
+                      ]
                     end
+                  end
 
-                    nav class: "mt-5" do
-                      a class: "button is-primary is-large mr-3",
+                  nav class: "mt-5 columns is-1" do
+                    div class: "column" do
+                      a class: "button is-flex is-primary is-large",
                         href: "https://github.com/pedro-gutierrez/sleeky.git" do
                         strong("Source")
                       end
+                    end
 
-                      a class: "button is-primary is-large is-light",
+                    div class: "column" do
+                      a class: "button is-flex is-primary is-large is-light",
                         href: "https://hexdocs.pm/sleeky/api-reference.html" do
                         strong("Documentation")
                       end
