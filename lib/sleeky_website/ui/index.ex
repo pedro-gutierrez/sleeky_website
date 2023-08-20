@@ -7,6 +7,8 @@ defmodule SleekyWebsite.Ui.Index do
     Features
   }
 
+  @sleeky_version :sleeky |> Application.spec() |> Keyword.get(:vsn) |> List.to_string()
+
   render do
     view Layout do
       content do
@@ -50,7 +52,11 @@ defmodule SleekyWebsite.Ui.Index do
                     div class: "column" do
                       a class: "button is-flex is-primary is-large is-light",
                         href: "https://hexdocs.pm/sleeky/api-reference.html" do
-                        strong("Documentation")
+                        strong("Hex Docs")
+
+                        span class: "mx-1" do
+                          "v#{@sleeky_version}"
+                        end
                       end
                     end
                   end
