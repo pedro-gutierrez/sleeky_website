@@ -25,8 +25,7 @@ defmodule SleekyWebsite.Ui.Index do
                     markdown class: "block" do
                       """
                         **Sleeky** is a new framework that allows you
-                      to build **lean**, **batteries included** web applications in a **fast**<br/>
-                      and **declarative** way.
+                      to build **lean** applications in a **fast** and **declarative** way.
                       """
                     end
                   end
@@ -35,8 +34,9 @@ defmodule SleekyWebsite.Ui.Index do
                     items do
                       [
                         [title: "Ash inspired"],
-                        [title: "Ecto based"],
-                        [title: "Phoenix compatible"]
+                        [title: "Ecto centric"],
+                        [title: "Phoenix compatible"],
+                        [title: "Batteries included"]
                       ]
                     end
                   end

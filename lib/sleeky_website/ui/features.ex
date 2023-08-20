@@ -5,14 +5,16 @@ defmodule SleekyWebsite.Ui.Features do
 
   render do
     div do
-      each :items do
-        div class: "is-inline-block has-text-success has-text-weight-bold is-size-4 mr-3" do
-          span class: "icon" do
-            i(class: "fas fa-check-square")
-          end
+      div class: "columns is-multiline is-gapless" do
+        each :items do
+          div class: "column has-text-success has-text-weight-bold is-size-4 is-half" do
+            span class: "icon" do
+              i(class: "fas fa-check-square")
+            end
 
-          span class: "ml-2" do
-            "{{ item.title }}"
+            span class: "ml-2" do
+              "{{ item.title }}"
+            end
           end
         end
       end
