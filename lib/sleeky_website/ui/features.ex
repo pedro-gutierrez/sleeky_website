@@ -5,9 +5,9 @@ defmodule SleekyWebsite.Ui.Features do
 
   render do
     div do
-      div class: "columns is-multiline is-gapless" do
+      div do
         each :items do
-          div class: "column has-text-success has-text-weight-bold is-size-4 is-half" do
+          div class: "has-text-success has-text-weight-bold is-size-4" do
             span class: "icon" do
               i(class: "fas fa-check-square")
             end

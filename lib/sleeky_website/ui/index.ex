@@ -2,6 +2,8 @@ defmodule SleekyWebsite.Ui.Index do
   @moduledoc false
   use Sleeky.Ui.View
 
+  alias SleekyWebsite.Ui.QuickStartDemo
+
   alias SleekyWebsite.Ui.{
     Layout,
     Features
@@ -15,16 +17,16 @@ defmodule SleekyWebsite.Ui.Index do
         section class: "section hero" do
           div class: "hero-body" do
             div class: "container" do
-              div class: "columns is-3" do
-                div class: "column is-mobile" do
+              div class: "columns is-3 is-vcentered" do
+                div class: "column is-mobile is-two-fifths" do
                   h1 class: "title is-1 has-text-weight-medium" do
-                    markdown("**Sleek** Elixir applications")
+                    markdown("**Sleek** and **productive** Elixir applications")
                   end
 
                   div class: "content is-size-4" do
                     markdown class: "block" do
                       """
-                        **Sleeky** is a new framework that allows you
+                        **Sleeky** is a free, open source framework that allows you
                       to build **lean** applications in a **fast** and **declarative** way.
                       """
                     end
@@ -35,8 +37,9 @@ defmodule SleekyWebsite.Ui.Index do
                       [
                         [title: "Ash inspired"],
                         [title: "Ecto centric"],
-                        [title: "Phoenix compatible"],
-                        [title: "Batteries included"]
+                        [title: "Productivity focused"],
+                        [title: "Batteries included"],
+                        [title: "Phoenix friendly"]
                       ]
                     end
                   end
@@ -62,7 +65,8 @@ defmodule SleekyWebsite.Ui.Index do
                   end
                 end
 
-                div class: "column" do
+                div class: "column px-6" do
+                  view QuickStartDemo
                 end
               end
             end

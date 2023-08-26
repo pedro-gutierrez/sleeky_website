@@ -4,3 +4,4 @@ defmodule SleekyWebsite.Schema do
 
   entity SleekyWebsite.Schema.User
 end
+
