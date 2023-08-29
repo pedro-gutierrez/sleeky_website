@@ -4,7 +4,7 @@ defmodule SleekyWebsite.Ui.Features do
   use Sleeky.Ui.View
 
   render do
-    div class: "columns is-multiline is-mobile is-3" do
+    div class: "columns is-multiline is-3" do
       each :items do
         div class: "column is-one-third" do
           div class: "has-text-success has-text-weight-bold is-size-4" do
