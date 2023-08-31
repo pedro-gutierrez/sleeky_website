@@ -13,7 +13,7 @@ defmodule SleekyWebsite.Ui.Index do
 
   render do
     view Layout do
-      content do
+      slot :content do
         div do
           section class: "section hero" do
             div class: "hero-body" do
@@ -64,45 +64,45 @@ defmodule SleekyWebsite.Ui.Index do
 
           section class: "section hero has-background-white-bis" do
             div class: "hero-body" do
-            div class: "container" do
-              view Features do
-                items do
-                  [
+              div class: "container" do
+                view Features do
+                  slot :items do
                     [
-                      title: "Ash inspired",
-                      summary:
-                        "Sleeky adheres to the exact same **model your domain, derive the rest** philosophy from **Ash**"
-                    ],
-                    [
-                      title: "Ecto centric",
-                      summary:
-                        "Everything in Sleeky gravitates around entities, and entities are **enhanced Ecto schemas**"
-                    ],
-                    [
-                      title: "Self migrated",
-                      summary:
-                        "Sleeky keeps track of your schema changes and **automatically** figures out the right database **migrations**, so you don't have to"
-                    ],
-                    [
-                      title: "Productivity focused",
-                      summary:
-                        "Sleeky is **opinionated** and makes some **decisions** for you, so that you can focus on the core of your problem"
-                    ],
-                    [
-                      title: "Batteries included",
-                      summary:
-                        "Background jobs, authorization, search, pub-sub, observability... Sleeky takes you as close to **production readiness** as possible"
-                    ],
-                    [
-                      title: "Phoenix friendly",
-                      summary:
-                        "**Pick** the features you like the most from Sleeky and use them in your **favourite** Elixir framework"
+                      [
+                        title: "Ash inspired",
+                        summary:
+                          "Sleeky adheres to the exact same **model your domain, derive the rest** philosophy from **Ash**"
+                      ],
+                      [
+                        title: "Ecto centric",
+                        summary:
+                          "Everything in Sleeky gravitates around entities, and entities are **enhanced Ecto schemas**"
+                      ],
+                      [
+                        title: "Self migrated",
+                        summary:
+                          "Sleeky keeps track of your schema changes and **automatically** figures out the right database **migrations**, so you don't have to"
+                      ],
+                      [
+                        title: "Productivity focused",
+                        summary:
+                          "Sleeky is **opinionated** and makes some **decisions** for you, so that you can focus on the core of your problem"
+                      ],
+                      [
+                        title: "Batteries included",
+                        summary:
+                          "Background jobs, authorization, search, pub-sub, observability... Sleeky takes you as close to **production readiness** as possible"
+                      ],
+                      [
+                        title: "Phoenix friendly",
+                        summary:
+                          "**Pick** the features you like the most from Sleeky and use them in your **favourite** Elixir framework"
+                      ]
                     ]
-                  ]
+                  end
                 end
               end
             end
-              end
           end
         end
       end

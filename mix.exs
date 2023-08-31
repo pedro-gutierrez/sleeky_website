@@ -20,7 +20,9 @@ defmodule SleekyWebsite.MixProject do
 
   def aliases do
     [
-      test: ["ecto.create --quiet", "ecto.migrate", "test"]
+      test: ["ecto.create --quiet", "ecto.migrate", "test"],
+      "guides.dev": ["cmd cp -rf ../sleeky priv"],
+      guides: ["cmd git clone https://github.com/pedro-gutierrez/sleeky.git priv/sleeky"]
     ]
   end
 
@@ -30,7 +32,7 @@ defmodule SleekyWebsite.MixProject do
   # Run "mix help compile.app" to learn about applications.
   def application do
     [
-      extra_applications: [:logger, :sleeky],
+      extra_applications: [:logger],
       mod: {SleekyWebsite.Application, []}
     ]
   end
@@ -41,7 +43,7 @@ defmodule SleekyWebsite.MixProject do
       {:credo, "~> 1.6", only: [:dev, :test], runtime: false},
       {:dialyxir, "~> 1.0", only: [:dev, :test], runtime: false},
       {:excoveralls, "~> 0.14", only: [:test]},
-      {:sleeky, git: "https://github.com/pedro-gutierrez/sleeky.git", branch: "main"}
+      {:sleeky, path: "/Users/pedrogutierrez/Projects/sleeky"}
     ]
   end
 end

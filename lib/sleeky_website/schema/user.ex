@@ -8,22 +8,22 @@ defmodule SleekyWebsite.Schema.User do
   unique :email
 
   action :list do
-    allow :admin
+    allow(:admin)
   end
 
   action :read do
-    allow :admin
+    allow(:admin)
   end
 
   action :create do
-    allow :admin
+    allow(:admin)
   end
 
   action :update do
-    allow :admin
+    allow(:admin)
   end
 
   action :delete do
-    allow :admin
+    allow(:admin)
   end
 end
