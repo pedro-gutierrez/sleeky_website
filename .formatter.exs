@@ -1,4 +1,4 @@
 [
-  inputs: ["{mix,.formatter}.exs", "{config,lib,test}/**/*.{ex,exs}"],
-  import_deps: [:sleeky]
+  import_deps: [:sleeky, :plug, :ecto, :ecto_sql],
+  inputs: ["{mix,.formatter}.exs", "{config,lib,test}/**/*.{ex,exs}"]
 ]

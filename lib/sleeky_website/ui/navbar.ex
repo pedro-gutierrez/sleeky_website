@@ -1,12 +1,13 @@
 defmodule SleekyWebsite.Ui.Navbar do
   @moduledoc false
-
   use Sleeky.Ui.View
 
+  alias SleekyWebsite.Ui.DocumentationSearch
+
   render do
-    nav class: "navbar p-4", role: "navigation", "aria-label": "main navigation" do
+    nav class: "navbar py-4 px-6", role: "navigation", "aria-label": "main navigation" do
       div class: "navbar-brand" do
-        a class: "navbar-item", href: "https://sleeky.dev" do
+        a class: "navbar-item", href: "/" do
           i(class: "fa-solid fa-fire-flame-curved fa-2x has-text-danger-dark")
 
           span class: "title ml-2 has-text-weight-bold" do
@@ -31,6 +32,7 @@ defmodule SleekyWebsite.Ui.Navbar do
         end
 
         div class: "navbar-end" do
+          view DocumentationSearch
         end
       end
     end

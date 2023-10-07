@@ -9,6 +9,7 @@ COPY mix.lock .
 RUN mix local.rebar --force \
     && mix local.hex --force \
     && mix deps.get \
+    && mix guides \
     && mix release
 
 FROM alpine:3.18.2

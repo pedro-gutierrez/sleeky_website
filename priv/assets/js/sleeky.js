@@ -1,5 +1,5 @@
 const token = S.data(null);
-
+const locationHash = S.data("");
 const state = S.data({
   collection: null,
   id: null,
@@ -23,7 +23,7 @@ function stateFor(col, id, action, childAction, token) {
 
   return {
     collection: col,
-    id:  (!id || id === 'new') ? null : id,
+    id: (!id || id === 'new') ? null : id,
     mode: mode,
     children: (action == null || action === 'edit' || action === 'delete') ? null : action,
   }
@@ -44,117 +44,31 @@ function deleteToken() {
 }
 
 function route() {
-  let steps = window.location.hash.replace("#", "").split('/').filter(w => w.length > 0);
+  let hash = window.location.hash.replace("#", "")
+  let steps = hash.split('/').filter(w => w.length > 0);
   state(stateFor(steps[0], steps[1], steps[2], steps[3], token));
+  locationHash(hash);
 }
 
 function visit(location) {
   window.location.href = location;
 }
 
-function payload(obj) {
-  let payload = {}
-  for (const key in obj) {
-    let value = obj[key];
-    if (typeof value === 'object') {
-      payload[key] = value.id;
-    } else payload[key] = value;
-  }
-  return payload;
-}
-
 function msg(resp) {
   switch (resp.status) {
-    case 200: return {id: 1, severity: 'primary', text: 'Success'}
-    case 201: return {id: 1, severity: 'primary', text: 'Success'}
-    case 204: return {id: 1, severity: 'primary', text: 'Success'}
-    case 400: return {id: 1, severity: 'warning', text: 'Please check your data'}
-    case 404: return {id: 1, severity: 'warning', text: 'Not found'}
-    case 409: return {id: 1, severity: 'warning', text: 'Already exists'}
-    default: return {id: 1, severity: 'danger', text: 'Server error'}
+    case 200: return { id: 1, severity: 'primary', text: 'Success' }
+    case 201: return { id: 1, severity: 'primary', text: 'Success' }
+    case 204: return { id: 1, severity: 'primary', text: 'Success' }
+    case 400: return { id: 1, severity: 'warning', text: 'Please check your data' }
+    case 404: return { id: 1, severity: 'warning', text: 'Not found' }
+    case 409: return { id: 1, severity: 'warning', text: 'Already exists' }
+    default: return { id: 1, severity: 'danger', text: 'Server error' }
   }
 }
 
-function scope(opts) {
-  let page = opts.page || 1
-  let limit = opts.page_size || 10
-  let offset = (page - 1)*limit
-  let q = opts.query || ''
-  return `?q=${q}&limit=${limit}&offset=${offset}`
-}
 
-async function readItem(collection, id) {
-  return await fetch(`/api/${collection}/${id}`, {
-    method: 'GET'
-  }).then((response) => {
-    if (response.ok) return response.json();
-    return Promise.reject(response);
-  }).then((data) => {
-    return {item: data, errors: []}
-  }).catch((error) => {
-    return {item: {}, errors: [msg(error)]}
-  })
-}
 
-async function searchItems(collection, opts) {
-  return await fetch(`/api/${collection}${scope(opts)}`, {
-    method: 'GET',
-  }).then((response) => {
-    if (response.ok) return response.json();
-    return Promise.reject(response);
-  }).then((data) => {
-    return {items: data, errors: []}
-  }).catch((error) => {
-    return {items: [], errors: [msg(error)]}
-  })
-}
 
-async function createItem(collection, data) {
-  return await fetch(`/api/${collection}`, {
-    method: 'POST',
-    headers: {
-      'content-type': 'application/json; charset=UTF-8'
-    },
-    body: JSON.stringify(payload(data))
-  }).then((response) => {
-    if (response.ok) return response.json();
-    return Promise.reject(response);
-  }).then((data) => {
-    return {item: data, errors: []}
-  }).catch((error) => {
-    return {item: data, errors: [msg(error)]}
-  })
-}
-
-async function updateItem(collection, id, data) {
-  return await fetch(`/api/${collection}/${id}`, {
-    method: 'PATCH',
-    headers: {
-      'content-type': 'application/json; charset=UTF-8'
-    },
-    body: JSON.stringify(payload(data))
-  }).then((response) => {
-    if (response.ok) return response.json();
-    return Promise.reject(response);
-  }).then((data) => {
-    return {item: data, errors: []}
-  }).catch((error) => {
-    return {item: data, errors: [msg(error)]}
-  })
-}
-
-async function deleteItem(collection, id) {
-  return await fetch(`/api/${collection}/${id}`, {
-    method: 'DELETE'
-  }).then((response) => {
-    if (response.ok) return {};
-    return Promise.reject(response);
-  }).then((data) => {
-    return {item: {}, errors: []}
-  }).catch((error) => {
-    return {item: item, errors: [msg(error)]}
-  })
-}
 
 async function aggregateChildren(collection, id, relation) {
   return await fetch(`/api/${collection}/${id}/${relation}/aggregate`, {
@@ -163,9 +77,9 @@ async function aggregateChildren(collection, id, relation) {
     if (response.ok) return response.json();
     return Promise.reject(response);
   }).then((data) => {
-    return {count: data.count, errors: []}
+    return { count: data.count, errors: [] }
   }).catch((error) => {
-    return {count: 0, errors: [msg(error)]}
+    return { count: 0, errors: [msg(error)] }
   })
 }
 
@@ -176,24 +90,11 @@ async function searchChildren(collection, id, relation, opts) {
     if (response.ok) return response.json();
     return Promise.reject(response);
   }).then((data) => {
-    return {items: data, errors: []}
+    return { items: data, errors: [] }
   }).catch((error) => {
-    return {items: [], errors: [msg(error)]}
+    return { items: [], errors: [msg(error)] }
   })
 }
-
-function prop(object, path) {
-  let temp = object;
-
-  path.split(".").forEach(subPath => {
-    temp = temp ? (temp[subPath] || null) : null
-  });
-
-  return temp;
-}
-
-
-
 
 function bindClasses(parent) {
   parent
@@ -324,42 +225,27 @@ function bindForm(el, form) {
     });
 }
 
-function bindFields(el, item) {
-  el
-    .querySelectorAll('[data-field]')
-    .forEach((child) => {
-      let path = child.dataset.field;
-      value = prop(item, path);
-      child.textContent = value;
-    });
-}
 
-function debounce(func, wait) {
-  let timeout;
 
-  return function executedFunction(...args) {
-    const later = () => {
-      clearTimeout(timeout);
-      func(...args);
-    };
 
-    clearTimeout(timeout);
-    timeout = setTimeout(later, wait);
-  };
-};
+
+
+
+
+
 
 function bindFilter(el, scope, collection) {
   el
     .querySelectorAll('[data-filter]')
     .forEach((el2) => {
-      let form = S.data({query: ""});
+      let form = S.data({ query: "" });
       el2
         .querySelectorAll('[data-field="query"]')
         .forEach((input) => {
           input.onkeyup = debounce(async function() {
             let query = input.value;
-            let {items, errors} = await searchItems(scope, {query: query});
-            collection({items, errors});
+            let { items, errors } = await searchItems(scope, { query: query });
+            collection({ items, errors });
           }, 300);
         });
     });
@@ -370,15 +256,15 @@ function bindChildrenMode(parent, parentScope, data) {
     .querySelectorAll('[data-mode="children"]')
     .forEach((el) => {
       let relation = el.dataset.scope;
-      let collection = S.data({items: [], errors: []});
+      let collection = S.data({ items: [], errors: [] });
 
       S(async () => {
         let global = state();
         let display = (global.children === relation) ? '' : 'none';
         el.style.display = display;
         if (display != 'none' && global.id) {
-          let {items, errors} = await searchChildren(parentScope, global.id, relation, {});
-          collection({items, errors});
+          let { items, errors } = await searchChildren(parentScope, global.id, relation, {});
+          collection({ items, errors });
         }
       });
 
@@ -391,11 +277,11 @@ function bindShowMode(parent) {
     .querySelectorAll("[data-mode='show']")
     .forEach((el) => {
       let scope = el.dataset.scope;
-      let form = S.data({item: {}, errors: []});
+      let form = S.data({ item: {}, errors: [] });
       bindDisplay(el, async () => {
         let id = state().id;
-        let {item, errors} = await readItem(scope, id);
-        form({item, errors});
+        let { item, errors } = await readItem(scope, id);
+        form({ item, errors });
       });
       bindForm(el, form);
       bindLinks(el, form)
@@ -408,11 +294,11 @@ function bindEditMode(parent) {
     .querySelectorAll("[data-mode='edit']")
     .forEach((el) => {
       let scope = el.dataset.scope;
-      let form = S.data({item: {}, errors: []});
+      let form = S.data({ item: {}, errors: [] });
       bindDisplay(el, async () => {
         let id = state().id;
-        let {item, errors} = await readItem(scope, id);
-        form({item, errors});
+        let { item, errors } = await readItem(scope, id);
+        form({ item, errors });
       });
       bindForm(el, form);
       bindPickup(el, form);
@@ -426,9 +312,9 @@ function bindEditMode(parent) {
             e.preventDefault();
             let f = form();
             let id = state().id;
-            let {item, errors} = await updateItem(scope, id, f.item);
+            let { item, errors } = await updateItem(scope, id, f.item);
             if (!errors.length) {
-              form({item: item});
+              form({ item: item });
               visit(`#/${scope}/${id}`)
             }
           });
@@ -441,11 +327,11 @@ function bindDeleteMode(parent) {
     .querySelectorAll("[data-mode='delete']")
     .forEach((el) => {
       let scope = el.dataset.scope;
-      let form = S.data({item: {}, errors: []});
+      let form = S.data({ item: {}, errors: [] });
       bindDisplay(el, async () => {
         let id = state().id;
-        let {item, errors} = await readItem(scope, id);
-        form({item, errors});
+        let { item, errors } = await readItem(scope, id);
+        form({ item, errors });
       });
       bindForm(el, form);
       bindLinks(el, form);
@@ -456,9 +342,9 @@ function bindDeleteMode(parent) {
           control.addEventListener("click", async (e) => {
             e.preventDefault();
             let id = state().id;
-            let {item, errors} = await deleteItem(scope, id);
+            let { item, errors } = await deleteItem(scope, id);
             if (!errors.length) {
-              form({item: item});
+              form({ item: item });
               visit(`#/${scope}`)
             }
           });
@@ -473,9 +359,9 @@ function bindCreateAction(el, form, scope) {
       control.addEventListener("click", async (e) => {
         e.preventDefault();
         let f = form();
-        let {errors} = await createItem(scope, f.item);
+        let { errors } = await createItem(scope, f.item);
         if (!errors.length) {
-          form({item: {}});
+          form({ item: {} });
           visit(`#/${scope}`)
         }
       });
@@ -488,7 +374,7 @@ function bindNewMode(parent) {
     .querySelectorAll("[data-mode='new']")
     .forEach((el) => {
       let scope = el.dataset.scope;
-      let form = S.data({item: {}});
+      let form = S.data({ item: {} });
       bindDisplay(el);
       bindForm(el, form);
       bindPickup(el, form);
@@ -504,7 +390,7 @@ function bindNewChildMode(parent) {
       let childScope = el.dataset.childScope;
       let relation = el.dataset.relation;
       let inverseRelation = el.dataset.inverseRelation;
-      let form = S.data({item: {}, errors: []});
+      let form = S.data({ item: {}, errors: [] });
 
       S(async () => {
         let global = state();
@@ -513,7 +399,7 @@ function bindNewChildMode(parent) {
           && global.children === relation;
         el.style.display = display ? '' : 'none';
         if (display) {
-          let {item ,errors} = await readItem(scope, global.id);
+          let { item, errors } = await readItem(scope, global.id);
           let f = S.sample(form);
           f.item[inverseRelation] = item;
           form(f);
@@ -562,11 +448,11 @@ function bindListMode(parent) {
     .querySelectorAll("[data-mode='list']")
     .forEach((el) => {
       let scope = el.dataset.scope;
-      let collection = S.data({items: [], errors: []});
+      let collection = S.data({ items: [], errors: [] });
 
       bindDisplay(el, async function() {
-        let {items, errors} = await searchItems(scope, {});
-        collection({items, errors});
+        let { items, errors } = await searchItems(scope, {});
+        collection({ items, errors });
       });
 
 
@@ -581,15 +467,15 @@ function bindReadMode(parent) {
     .querySelectorAll("[data-mode='read']")
     .forEach((el) => {
       let scope = el.dataset.scope;
-      let data = S.data({item: null, errors: []});
+      let data = S.data({ item: null, errors: [] });
       let itemId = el.dataset.id;
 
       bindDisplay(el, async function() {
-        let {item, errors} = await readItem(scope, itemId);
-        data({item, errors});
+        let { item, errors } = await readItem(scope, itemId);
+        data({ item, errors });
       });
 
-      S(() =>{
+      S(() => {
         let item = data().item;
         bindFields(el, item);
       });
@@ -603,16 +489,16 @@ function bindPickup(parent, form) {
       let scope = el.dataset.pickup;
       let formFieldName = el.dataset.pickupName;
       let query = S.data("");
-      let collection = S.data({items: [], errors: []});
+      let collection = S.data({ items: [], errors: [] });
 
       S(async () => {
         let q = query()
 
         if (q.length) {
-          let {items, errors} = await searchItems(scope, {query: q});
-          collection({items, errors});
+          let { items, errors } = await searchItems(scope, { query: q });
+          collection({ items, errors });
         } else {
-          collection({items: [], errors: []})
+          collection({ items: [], errors: [] })
         }
 
         el
@@ -653,23 +539,44 @@ function bindPickup(parent, form) {
     });
 }
 
-window.addEventListener('hashchange', route)
+function bindGuides(parent) {
+  S(() => {
+    let hash = locationHash();
+    parent
+      .querySelectorAll("[data-menu]")
+      .forEach((el) => {
+        if (el.href.endsWith(hash)) {
+          el.classList.add("is-active")
+        } else {
+          el.classList.remove("is-active")
+        }
+      });
 
-route();
-token(readToken());
+    parent
+      .querySelectorAll("[data-content]")
+      .forEach((el) => {
+        console.log("id", { id: el.id, hash: hash });
+        el.style.display = (el.id.endsWith(hash)) ? '' : 'none';
+      });
+  });
+}
 
-S.root(() => {
-  bindClasses(document);
-  bindNavMode(document);
-  bindShowMode(document);
-  bindEditMode(document);
-  bindDeleteMode(document);
-  bindNewMode(document);
-  bindListMode(document);
-  bindReadMode(document);
-  bindNewChildMode(document);
-  bindPrivateMode(document);
-  bindPublicMode(document);
-});
-
-
+//window.addEventListener('hashchange', route)
+//
+//route();
+//token(readToken());
+//
+//S.root(() => {
+//  bindClasses(document);
+//  bindNavMode(document);
+//  bindShowMode(document);
+//  bindEditMode(document);
+//  bindDeleteMode(document);
+//  bindNewMode(document);
+//  bindListMode(document);
+//  bindReadMode(document);
+//  bindNewChildMode(document);
+//  bindPrivateMode(document);
+//  bindPublicMode(document);
+//  bindGuides(document)
+//});

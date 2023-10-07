@@ -1,0 +1,34 @@
+body {
+    font-size: 1.1em;
+}
+
+.control {
+    font-size: 1.01em;
+}
+
+figure {
+    border-radius: 6px;
+}
+
+pre {
+    border-radius: 7px;
+    background-color: #1f2330;
+    color: white;
+}
+
+strong {
+    font-weight: 700 !important
+}
+
+.button {
+    border-radius: 7px;
+}
+
+.menu a.is-active {
+    border-radius: 5px;
+    background-color: #00d1b2;
+}
+
+.dropdown-menu {
+    top: 90%;
+}
